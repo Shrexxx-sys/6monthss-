@@ -5,51 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Journey</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap');
 
-        /* Glow around music button */
-        #music-btn.highlight {
-            animation: glow 1s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from {
-                box-shadow: 0 0 5px var(--sky-blue), 0 0 10px var(--sky-blue);
-            }
-
-            to {
-                box-shadow: 0 0 20px #87c1de, 0 0 40px #87c1de;
-            }
-        }
-
-        /* "Click me!" message */
-        .music-message {
-            font-size: 14px;
-            color: black;
-            margin-left: 10px;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: all 0.6s ease;
-        }
-
-        .music-message.show-message {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Background dim overlay */
-        .dim-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            display: none;
-        }
-
+        /* ---------- VARIABLES ---------- */
         :root {
             --sky-blue: #a0d2eb;
             --light-blue: #d6eaf8;
@@ -59,6 +19,7 @@
             --light-text: #666666;
         }
 
+        /* ---------- GLOBAL RESET ---------- */
         * {
             margin: 0;
             padding: 0;
@@ -76,27 +37,13 @@
             min-height: 100vh;
         }
 
-        @keyframes gradientBG {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* Navigation */
+        /* ---------- NAVIGATION ---------- */
         nav {
             position: fixed;
             top: 0;
@@ -125,26 +72,82 @@
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            align-items: center;
+            gap: 20px;
         }
 
         .nav-links a {
             color: var(--text);
             text-decoration: none;
             font-weight: 400;
-            position: relative;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease;
         }
 
         .nav-links a:hover {
             color: var(--sky-blue);
         }
 
-        /* Header */
+        #music-btn {
+            background: var(--sky-blue);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            color: var(--white);
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #music-btn:hover {
+            background: #87c1de;
+        }
+
+        /* Glow animation for music button */
+        #music-btn.highlight {
+            animation: glow 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px var(--sky-blue), 0 0 10px var(--sky-blue);
+            }
+
+            to {
+                box-shadow: 0 0 20px #87c1de, 0 0 40px #87c1de;
+            }
+        }
+
+        /* "Click me!" message */
+        .music-message {
+            font-size: 14px;
+            color: var(--text);
+            margin-left: 10px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.6s ease;
+        }
+
+        .music-message.show-message {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Background dim overlay */
+        .dim-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        /* ---------- HEADER ---------- */
         header {
             padding: 180px 0 100px;
             text-align: center;
-            position: relative;
             overflow: hidden;
         }
 
@@ -161,36 +164,14 @@
         .subtitle {
             font-size: 1.2rem;
             color: var(--text);
+            max-width: 600px;
+            margin: 0 auto 30px;
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 1s ease 0.3s forwards;
-            max-width: 600px;
-            margin: 0 auto 30px;
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        /* Sections */
+        /* ---------- SECTIONS ---------- */
         section {
             padding: 100px 0;
             position: relative;
@@ -216,11 +197,11 @@
             background: var(--sky-blue);
         }
 
-        /* Gallery */
+        /* ---------- GALLERY ---------- */
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
             margin-top: 40px;
         }
 
@@ -272,11 +253,12 @@
             transform: translateY(0);
         }
 
-        /* Story Section */
+        /* ---------- STORY SECTION ---------- */
         .story-container {
             display: flex;
             align-items: center;
             gap: 60px;
+            flex-wrap: wrap;
         }
 
         .story-text {
@@ -297,7 +279,6 @@
 
         .story-image {
             flex: 1;
-            position: relative;
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 0.6s ease 0.3s forwards;
@@ -310,16 +291,16 @@
             animation: float 4s ease-in-out infinite;
         }
 
-        /* Memories Section */
+        /* ---------- MEMORIES ---------- */
         .memory-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
             margin-top: 40px;
         }
 
         .memory-card {
-            background-color: var(--white);
+            background: var(--white);
             border-radius: 12px;
             padding: 30px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -344,28 +325,12 @@
             color: var(--sky-blue);
         }
 
-        /* Timeline Section */
+        /* ---------- TIMELINE ---------- */
         .timeline {
             position: relative;
             max-width: 800px;
             margin: 40px auto;
         }
-
-        #music-btn {
-            background: var(--sky-blue);
-            border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            color: white;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        #music-btn:hover {
-            background: #87c1de;
-        }
-
 
         .timeline::before {
             content: '';
@@ -412,7 +377,7 @@
             color: var(--sky-blue);
         }
 
-        /* Footer */
+        /* ---------- FOOTER ---------- */
         footer {
             text-align: center;
             padding: 60px 0;
@@ -425,22 +390,74 @@
             animation: pulse 1.5s infinite;
         }
 
-        @keyframes pulse {
+        /* ---------- ANIMATIONS ---------- */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
             0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
                 transform: scale(1);
             }
 
             50% {
                 transform: scale(1.1);
             }
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
 
             100% {
-                transform: scale(1);
+                background-position: 0% 50%;
             }
         }
 
-        /* Responsive */
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 992px) {
+
+            .gallery,
+            .memory-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
             .story-container {
                 flex-direction: column;
             }
@@ -458,6 +475,23 @@
 
             .timeline-item:nth-child(even) {
                 left: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .gallery,
+            .memory-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+
+            #music-btn {
+                width: 100%;
+                font-size: 16px;
             }
         }
     </style>
