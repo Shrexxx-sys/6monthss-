@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Journey</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap');
+
+        :root {
+            --sky-blue: #a0d2eb;
+            --light-blue: #d6eaf8;
+            --white: #ffffff;
+            --soft-grey: #f5f5f5;
+            --text: #333333;
+            --light-text: #666666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: linear-gradient(-45deg, var(--sky-blue), var(--light-blue), var(--white));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 400;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--sky-blue);
+        }
+
+        /* Header */
+        header {
+            padding: 180px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease 0.3s forwards;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--sky-blue);
+        }
+
+        /* Gallery */
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            aspect-ratio: 4/5;
+            background: var(--white);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .gallery-item.animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+            color: var(--white);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* Story Section */
+        .story-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .story-text {
+            flex: 1;
+        }
+
+        .story-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .story-text p.animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .story-image {
+            flex: 1;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease 0.3s forwards;
+        }
+
+        .story-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Memories Section */
+        .memory-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .memory-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .memory-card.animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .memory-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .memory-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--sky-blue);
+        }
+
+        /* Timeline Section */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+
+        #music-btn {
+            background: var(--sky-blue);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        #music-btn:hover {
+            background: #87c1de;
+        }
+
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--sky-blue);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .timeline-item.animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-date {
+            font-weight: 500;
+            color: var(--sky-blue);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            background: rgba(160, 210, 235, 0.3);
+        }
+
+        .heart {
+            color: #ff6b6b;
+            display: inline-block;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .story-container {
+                flex-direction: column;
+            }
+
+            .timeline::before {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+                text-align: left !important;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo">Our Journey</a>
+            <div class="nav-links">
+                <button id="music-btn">🎵 Play</button>
+                <a href="#home">Home</a>
+                <a href="#gallery">Moments</a>
+                <a href="#story">Our Story</a>
+                <a href="#memories">Memories</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home">
+        <div class="container">
+            <h1>Happy 6 months:)</h1>
+            <p class="subtitle">stay happy gang🙂🙏</p>
+        </div>
+    </header>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <div class="container">
+            <h2 class="section-title">Captured Moments</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="p1.jpg" alt="Special moment">
+                    <div class="gallery-caption">freaky in auto</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="p2.jpg" alt="Special moment">
+                    <div class="gallery-caption">flowersss</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="p3.jpg" alt="Special moment">
+                    <div class="gallery-caption">freaky in photobooth</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <audio id="bg-music" src="music.mp3" loop></audio>
+
+    <!-- Story Section -->
+    <section id="story">
+        <div class="container">
+            <h2 class="section-title">Storytimee!!!</h2>
+            <div class="story-container">
+                <div class="story-text">
+                    <p>
+                        met this one girl 9 years ago. same school, same locality, but somehow never really hung out. i
+                        had my own group with the boys and there she was, a girl, and i know how that sounds but that’s
+                        how it was. we never clicked back then, just existed in the same space without actually knowing
+                        each other. then one random day i ended up going to her apartment. no clue why, no plan, just a
+                        random instinct. they say god gives you things when you least expect it and maybe that was one
+                        of those moments. after that we started playing downstairs, casually, like kids do, but even
+                        then something felt different. she was the first person who introduced me to an english song,
+                        love me like you do, and it’s insane how that song still means something to both of us, even
+                        when we had no idea how much life would change. then i moved out of mumbai, out of state, and
+                        time just moved on. we were kids, no phones, no way to stay in touch, and that bond slowly faded
+                        like chai left to cool. every time i came back to mumbai i avoided her. not because of anything
+                        bad, i was just shy. then out of nowhere, one day i get a follow request on insta. 9 years
+                        later. it was her. we started talking again and somehow it didn’t feel awkward at all, it felt
+                        familiar. the conversations turned into comfort and one day i asked her out. i wasn’t expecting
+                        much, didn’t think she’d say yes, but she did. she actually said yes. and she was everything.
+                        sweet, funny, beautiful, kind. the first girl who made me feel genuinely wanted, who looked at
+                        all the things i was insecure about and never made me feel small for them. even when i couldn’t
+                        explain myself properly she still understood me. and now we’re together.its been 6 months and i
+                        couldn’t be happier. it’s long distance, but that doesn’t really matter when it’s her. the same
+                        girl who once played love me like you do for me is now the one i love the way she truly
+                        deserves.so yes maithili if you're reading this then its true, you are that girl and i love you:) 
+                    </p>
+                </div>
+                <div class="story-image">
+                    <img src="p4.jpg" alt="Our story">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="memories">
+  <div class="container">
+    <h2 class="section-title">Special Memories</h2>
+    <div class="memory-cards">
+      <div class="memory-card">
+        <h3>Catch me if you can in your buildinggg</h3>
+        <p>The things i remember istgg😭😭😭😭</p>
+      </div>
+      <div class="memory-card">
+        <h3>Diwali 2024</h3>
+        <p>We reconnected after 8 years roughly!!CRAZY!!!!! and started talkingggg</p>
+      </div>
+      <div class="memory-card">
+        <h3>New years!!</h3>
+        <p>the best night of my life (except the one when i slept after eating chhole bhature)</p>
+      </div>
+      <div class="memory-card">
+        <h3>20th jan</h3>
+        <p>One of the best hangouts i remember(:</p>
+      </div>
+      <div class="memory-card">
+        <h3>25th february!!!</h3>
+        <p>WE COONNFFESSSEDDDD!!!</p>
+      </div>
+      <div class="memory-card">
+        <h3>4th march</h3>
+        <p>We got together:)</p>
+      </div>
+      <div class="memory-card">
+        <h3>ENE KHAVAANU KEM NO KHAVDAVYUU😭😭😭😭</h3>
+        <p>I love this!</p>
+      </div>
+      <div class="memory-card">
+        <h3>Mumbai Meetup</h3>
+        <p>cant believe my dumbass snuck out and met you 😭</p>
+      </div>
+      <div class="memory-card">
+        <h3>4th september</h3>
+        <p>6 MONTHSSSS!!!!!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Made with <span class="heart">♥</span> for you</p>
+        </div>
+    </footer>
+
+    <script>
+        const music = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-btn');
+
+        let isPlaying = false;
+
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                music.pause();
+                musicBtn.textContent = "🎵 Play";
+            } else {
+                music.play();
+                musicBtn.textContent = "⏸ Pause";
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Scroll animations
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.gallery-item, .story-text p, .memory-card, .timeline-item');
+            elements.forEach((el, index) => {
+                const elementPosition = el.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+
+                if (elementPosition < screenPosition) {
+                    el.classList.add('animate');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
