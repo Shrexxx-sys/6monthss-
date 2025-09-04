@@ -8,6 +8,48 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap');
 
+        /* Glow around music button */
+        #music-btn.highlight {
+            animation: glow 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px var(--sky-blue), 0 0 10px var(--sky-blue);
+            }
+
+            to {
+                box-shadow: 0 0 20px #87c1de, 0 0 40px #87c1de;
+            }
+        }
+
+        /* "Click me!" message */
+        .music-message {
+            font-size: 14px;
+            color: black;
+            margin-left: 10px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.6s ease;
+        }
+
+        .music-message.show-message {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Background dim overlay */
+        .dim-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
         :root {
             --sky-blue: #a0d2eb;
             --light-blue: #d6eaf8;
@@ -175,7 +217,13 @@
         }
 
         /* Gallery */
-        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
         .gallery-item {
             position: relative;
             overflow: hidden;
@@ -422,6 +470,7 @@
             <a href="#" class="logo">Our Journey</a>
             <div class="nav-links">
                 <button id="music-btn">🎵 Play</button>
+                <p id="music-msg" class="music-message">Click me!</p>
                 <a href="#home">Home</a>
                 <a href="#gallery">Moments</a>
                 <a href="#story">Our Story</a>
@@ -429,6 +478,9 @@
             </div>
         </div>
     </nav>
+
+    <!-- dim background overlay (sits outside nav so it covers full page) -->
+    <div id="dimOverlay" class="dim-bg"></div>
 
     <!-- Hero Section -->
     <header id="home">
@@ -487,7 +539,8 @@
                         explain myself properly she still understood me. and now we’re together.its been 6 months and i
                         couldn’t be happier. it’s long distance, but that doesn’t really matter when it’s her. the same
                         girl who once played love me like you do for me is now the one i love the way she truly
-                        deserves.so yes maithili if you're reading this then its true, you are that girl and i love you:) 
+                        deserves.so yes maithili if you're reading this then its true, you are that girl and i love
+                        you:)
                     </p>
                 </div>
                 <div class="story-image">
@@ -498,50 +551,50 @@
     </section>
 
     <section id="memories">
-  <div class="container">
-    <h2 class="section-title">Special Memories</h2>
-    <div class="memory-cards">
-      <div class="memory-card">
-        <h3>Catch me if you can in your buildinggg</h3>
-        <p>The things i remember istgg😭😭😭😭</p>
-      </div>
-      <div class="memory-card">
-        <h3>Diwali 2024</h3>
-        <p>We reconnected after 8 years roughly!!CRAZY!!!!! and started talkingggg</p>
-      </div>
-      <div class="memory-card">
-        <h3>New years!!</h3>
-        <p>the best night of my life (except the one when i slept after eating chhole bhature)</p>
-      </div>
-      <div class="memory-card">
-        <h3>20th jan</h3>
-        <p>One of the best hangouts i remember(:</p>
-      </div>
-      <div class="memory-card">
-        <h3>25th february!!!</h3>
-        <p>WE COONNFFESSSEDDDD!!!</p>
-      </div>
-      <div class="memory-card">
-        <h3>4th march</h3>
-        <p>We got together:)</p>
-      </div>
-      <div class="memory-card">
-        <h3>ENE KHAVAANU KEM NO KHAVDAVYUU😭😭😭😭</h3>
-        <p>I love this!</p>
-      </div>
-      <div class="memory-card">
-        <h3>Mumbai Meetup</h3>
-        <p>cant believe my dumbass snuck out and met you 😭</p>
-      </div>
-      <div class="memory-card">
-        <h3>4th september</h3>
-        <p>6 MONTHSSSS!!!!!</p>
-      </div>
-    </div>
-  </div>
-</section>
+        <div class="container">
+            <h2 class="section-title">Special Memories</h2>
+            <div class="memory-cards">
+                <div class="memory-card">
+                    <h3>Catch me if you can in your buildinggg</h3>
+                    <p>The things i remember istgg😭😭😭😭</p>
+                </div>
+                <div class="memory-card">
+                    <h3>Diwali 2024</h3>
+                    <p>We reconnected after 8 years roughly!!CRAZY!!!!! and started talkingggg</p>
+                </div>
+                <div class="memory-card">
+                    <h3>New years!!</h3>
+                    <p>the best night of my life (except the one when i slept after eating chhole bhature)</p>
+                </div>
+                <div class="memory-card">
+                    <h3>20th jan</h3>
+                    <p>One of the best hangouts i remember(:</p>
+                </div>
+                <div class="memory-card">
+                    <h3>25th february!!!</h3>
+                    <p>WE COONNFFESSSEDDDD!!!</p>
+                </div>
+                <div class="memory-card">
+                    <h3>4th march</h3>
+                    <p>We got together:)</p>
+                </div>
+                <div class="memory-card">
+                    <h3>ENE KHAVAANU KEM NO KHAVDAVYUU😭😭😭😭</h3>
+                    <p>I love this!</p>
+                </div>
+                <div class="memory-card">
+                    <h3>Mumbai Meetup</h3>
+                    <p>cant believe my dumbass snuck out and met you 😭</p>
+                </div>
+                <div class="memory-card">
+                    <h3>4th september</h3>
+                    <p>6 MONTHSSSS!!!!!</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -591,6 +644,24 @@
                 });
             });
         });
+        window.addEventListener('load', () => {
+            const musicBtn = document.getElementById("music-btn");
+            const msg = document.getElementById("music-msg");
+            const dim = document.getElementById("dimOverlay");
+
+            // Show dim background + highlight button + message
+            dim.style.display = "block";
+            musicBtn.classList.add("highlight");
+            msg.classList.add("show-message");
+
+            // When clicked → remove highlight + hide overlay + message
+            musicBtn.addEventListener("click", () => {
+                dim.style.display = "none";
+                musicBtn.classList.remove("highlight");
+                msg.classList.remove("show-message");
+            }, { once: true });
+        });
+
     </script>
 </body>
 
